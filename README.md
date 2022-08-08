@@ -18,12 +18,12 @@
 # **Generate by adding it to your hotspot portal**
 ### **How to add Voucher Generator in your hotspot portal?**
 
-### 1. Download the folder [Hotspot](/hotspot) and extract the files.
+### 1. Download the [hotspot](/hotspot) folder and extract the files.
 > ![Step 1](img/1.PNG)
 
-### 2. Backup your hotspot folder first before adding the voucher generator files.
+### 2. Backup your orignal hotspot files first before adding the voucher generator files.
 > ![Step 2](img/2.PNG)
-### 3. Paste copy the **vcgen.html** and **genfolder** inside the **/hotspot** folder.
+### 3. Copy and paste the **vcgen.html** and **genfolder** inside the **/hotspot** folder.
 > ![Step 3](img/3.PNG)
 ## 4. **Done!** 
 
