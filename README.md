@@ -1,6 +1,3 @@
-# JuanFiGenerator
-JuanFi Voucher Generator
-=======
 # **JuanFi Voucher Generator**
 
 ### **Added:** 
@@ -57,6 +54,3 @@ JuanFi Voucher Generator
     Made by Kintoyyy :)
     Gcash account: Kent R. 09760009422
     FB: @kint.oyyy508
-
-
->>>>>>> 0d4a88f4e05d8416a1e8a404b2ffdf240cd99147
