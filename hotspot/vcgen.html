@@ -1,0 +1,136 @@
+<!doctypehtml>
+<html lang=en>
+<title>Generate</title>
+<link href=genfolder/voucher.css rel=stylesheet>
+<link href=genfolder/bootstrap.min.css rel=stylesheet>
+<script src=genfolder/bootstrap.min.js></script>
+<div class="p-3 container">
+    <h1 class="fw-bold text-center">JuanFi Voucher Script Generator</h1>
+    <h6 class="text-center mt-3">Simple Voucher generator fo Juanfi System</h6>
+    <form id=rst>
+        <div class="mb-3 rst"><label class=form-label for=Vendo>Vendo Name</label> <input class="form-control reset" id=Vendo placeholder=github@Kintoyyy value=JuanFi maxlength=14></div>
+        <div class=row>
+            <div class="col mb-3"><label class=form-label for=Prefix>Prefix<text class=text-danger> max 3 characters</text></label> <input class=form-control id=Prefix placeholder="e.g. P5, P10, P20" value=VC maxlength=3></div>
+            <div class=col>
+                <div class=row><label class=form-label for=length>Voucher length</label>
+                    <div class="col mb-3"><select aria-label="Default select" class=form-select id=Length><option value=6 selected>6<option value=7>7<option value=8>8<option value=9>9<option value=10>10</select></div>
+                    <div class=col-auto>
+                        <div class=btn-group role=group aria-label="Basic radio toggle button group"><input class=btn-check id=userpass type=radio name=btnradio autocomplete=off checked> <label class="btn btn-outline-secondary" for=userpass>username + password</label> <input class=btn-check id=useronly type=radio name=btnradio
+                                autocomplete=off> <label class="btn btn-outline-secondary" for=useronly>username only</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=row>
+            <div class="col mb-3"><label class=form-label for=Price>Voucher Price</label>
+                <div class=row>
+                    <div class=col><input class="form-control Clear-all" id=Price placeholder=Amount min=0 value=0 type=number></div>
+                </div>
+            </div>
+            <div class="col mb-3"><label class=form-label for=Quantity>Quantity</label> <input class=form-control id=Quantity placeholder=pcs. min=1 max=100 max=1000 type=number value=5></div>
+        </div>
+        <div class="mb-3 row">
+            <div class="col input-group">
+                <div class=w-100><label class=form-label for=Duration>Voucher Duration<text class=text-info> limit-uptime</text><label></div><input class=form-control id=LDays placeholder=Days min=0 max=31 type=number maxlength=3> <input class=form-control id=LHours placeholder=Hours min=0 max=59 type=number maxlength=2> <input class="form-control d-flex"id=LMinutes placeholder=Minutes min=0 max=59 type=number maxlength=2></div><div class="col input-group"><div class=w-100><label class=form-label for=Duration>Voucher Validity<text class=text-warning> Optional</text><label></div><input class=form-control id=VDays placeholder=Days min=0 max=31 type=number maxlength=3> <input class=form-control id=VHours placeholder=Hours min=0 max=59 type=number maxlength=2> <input class="form-control d-flex"id=VMinutes placeholder=Minutes min=0 max=59 type=number maxlength=2></div></div><div class=row><label class=form-label for=Data>Voucher Data Package<text class=text-warning> Optional M=MB G=GB ( 2GB, 500MB, 5GB )</text></label>
+                    <div class="col mb-3"><input class=form-control id=Data placeholder="Data ( 1K 2M 4G )" min=0 value=0></div>
+                </div>
+                <div class=row>
+                    <div class="col mb-3"><label class=form-label for=Profile>User Profile<text class=text-warning> Optional default</text></label> <input class=form-control id=Profile placeholder=default value=default></div>
+                    <div class="col mb-3"><label class=form-label for=Server>Hotspot Server<text class=text-warning> Optional</text></label> <input class=form-control id=Server placeholder=all value=all></div>
+                    <div class="col mb-3"><label class=form-label for=Server>Hotspot IP<text class=text-warning> For voucher printing</text></label> <input class=form-control id=ip placeholder="10.0.0.1, juanfi.hotspot, hot.spot" value=10.0.0.1></div>
+                </div>
+    </form>
+    <div class="gap-2 d-grid">
+        <div class="d-flex gap-2"><button class="col btn btn-secondary" data-bs-target=#infoModal data-bs-toggle=modal>Infos</button> <button class="col btn btn-secondary" data-bs-target=#customize data-bs-toggle=modal>Customize</button></div><button class="btn btn-success" onclick=Generate()>Generate</button>        <button class="btn btn-primary" onclick='copyCode("OutputCode")'>Copy</button>
+        <div class="d-flex gap-2"><button class="col btn btn-danger" onclick=rst() value="Reset form">Clear All</button> <button class="col btn btn-warning" data-bs-target=#PrintCode data-bs-toggle=modal>Print</button></div>
+    </div>
+    <div class="row m-2">
+        <div class="col fw-bold h my-2">Script Output</div>
+        <div class="col fw-bold h my-2" id=Total></div>
+    </div>
+    <div class="border highlight" id=OutputCode><code><span>/ip hotspot user<br></span><span id=Output></span></code></div>
+    <div class=mt-3>
+        <div class="text-center align-self-center" id=crdts>Made by <a href=https://kintoyyy.github.io/Me/ id=kintoyyy>kintoyyy ❤</a></div>
+    </div>
+    </div>
+    <div class="modal fade" id=infoModal tabindex=-1 aria-hidden=true>
+        <div class=modal-dialog>
+            <div class=modal-content>
+                <div class=modal-header>
+                    <h5 class=modal-title>Info version 1.3.3</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div>
+                <div class=modal-body id=modalprint>
+                    <li>Added Username + Password and Username only options
+                        <li>Added Currency Editor
+                            <li>Added Qr Code Vouchers
+                                <li>Added Voucher Validity
+                                    <li class=text-danger>User + password QR is still not working</li><br>
+                                    <p>Github: <a href=https://github.com/Kintoyyy/JuanfiGenerator>Kintoyyy/JuanfiGenerator</a>
+                                        <p>Gcash: <span class="fw-bold text-primary">09760009422 Kent R.</span></div>
+            </div>
+        </div>
+    </div>
+    <print>
+        <div class="modal fade" id=PrintCode tabindex=-1 aria-hidden=true>
+            <div class="modal-dialog modal-fullscreen">
+                <div class=modal-content>
+                    <div class=modal-body id=Print>
+                        <link href=css/voucher.css rel=stylesheet>
+                        <div id=PrintBody>
+                            <div class="fw-bold text-center alert alert-warning" role=alert>Generate Voucher First!</div>
+                        </div>
+                    </div>
+                    <div class=modal-footer>
+                        <div class="fw-bold text-center alert alert-danger" role=alert>Paste the script in your Mikrotik Terminal first before Printing the vouchers!</div>
+                        <div class="fw-bold text-center alert alert-info" role=alert>Refresh the browser if cannot exit the print page</div><button class="btn btn-warning" onclick='printDiv("Print")'>Print</button> <button class="btn btn-secondary" type=button data-bs-dismiss=modal>Exit</button></div>
+                </div>
+            </div>
+        </div>
+    </print>
+    <div class=modal id=customize tabindex=-1>
+        <div class=modal-dialog>
+            <div class=modal-content>
+                <div class=modal-header>
+                    <h5 class=modal-title>Voucher Customization</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div>
+                <div class=modal-body>
+                    <div class="row px-4">
+                        <div class=col>
+                            <table class=voucher style=width:150px>
+                                <tr>
+                                    <td style="font-weight:700;border-right:1px solid #000;background-color:#ffea8f" class=rotate id=voucher1 rowspan=4><span>PHP 200</span>
+                                        <td style=font-weight:700 colspan=2>JuanFi Hotspot
+                                            <d>
+                                                <tr>
+                                                    <td style=width:100%;font-weight:700;font-size:18px;text-align:center>ABC1234
+                                                        <tr>
+                                                            <td style=font-size:11px>Duration: 1D 2H 3M
+                                                                <tr>
+                                                                    <td style=font-size:12px colspan=3>Login: http: //<span style=font-weight:700>10.0.0.1</span></table>
+                        </div>
+                        <div class=col>
+                            <table class=voucher style=width:200px>
+                                <tr>
+                                    <td style="font-weight:700;border-right:1px solid #000;background-color:#ffea8f" class=rotate id=voucher2 rowspan=4><span>PHP 100</span>
+                                        <td style=font-weight:700 colspan=2>JuanFi
+                                            <td rowspan=3>
+                                                <div class=qr-wrapper><img class="p-1 qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=http://10.0.0.1/login?username=ABC1234"></div>
+                                                <tr>
+                                                    <td style=width:100%;font-weight:700;font-size:18px;text-align:center>ABC1234
+                                                        <tr>
+                                                            <td style=font-size:11px>Duration: 1D 2H 3M
+                                                                <tr>
+                                                                    <td style=font-size:12px colspan=3>Login: http: //<span style=font-weight:700>10.0.0.1</span></table>
+                        </div>
+                    </div>
+                </div>
+                <div class=p-3>
+                    <div class=row>
+                        <div class=col><label class=form-label for=currency>Currency</label> <input class=form-control id=currency placeholder=currency value=PHP></div>
+                        <div class=col><label class=form-label for=TagColor>Tag Color</label> <input class=form-control id=TagColor type=color name=TagColor value=#ffea8f></div>
+                        <div class=col>
+                            <div class=from-label>
+                                <div class="form-check form-switch"><label class="text-primary form-check-label" for=qrcodebtn>QR Printing</label> <input class=form-check-input id=qrcodebtn type=checkbox data-bs-toggle=tooltip title="QR generation is still buggy"></div>
+                            </div><button class="form-control btn btn-secondary" onclick=color() type=button>Apply</button></div>
+                    </div>
+                </div>
+                <script src=genfolder/generate.js></script>
+                <script src=genfolder/genconfig.js></script>
