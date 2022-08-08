@@ -18,13 +18,13 @@
 # **Generate by adding it to your hotspot portal**
 ### **How to add Voucher Generator in your hotspot portal?**
 
-### 1. Download the folder [Hotspot](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot) and extract the files.
-> ![Step 1](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/1.PNG)
+### 1. Download the folder [Hotspot](/hotspot) and extract the files.
+> ![Step 1](img/1.PNG)
 
 ### 2. Backup your hotspot folder first before adding the voucher generator files.
-> ![Step 2](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/2.PNG)
+> ![Step 2](img/2.PNG)
 ### 3. Paste copy the **vcgen.html** and **genfolder** inside the **/hotspot** folder.
-> ![Step 3](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/3.PNG)
+> ![Step 3](img/3.PNG)
 ## 4. **Done!** 
 
 ### 5. You can now access the Generator webpage using your hotspot ip address and placing **/vcgen.html** at the end of it.
@@ -35,13 +35,13 @@
 
 # **Screenshots**
 - Main Page
-![SS](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/SS1.PNG)
+![SS1](img/SS1.PNG)
 - Voucher Customization
-![SS](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/SS2.PNG)
+![SS2](img/SS2.PNG)
 - printing page
-![SS](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/SS3.PNG)
+![SS3](img/SS3.PNG)
 - print settings
-![SS](https://github.com/Kintoyyy/JuanFiGenerator/tree/main/hotspot/img/SS4.PNG)
+![SS4](img/SS4.PNG)
 
 
 > ## **This Voucher Generator Only works for [ivanalayan15/JuanFi](https://github.com/ivanalayan15/JuanFi) system**
