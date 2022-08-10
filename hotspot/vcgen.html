@@ -4,8 +4,11 @@
 <link href=genfolder/voucher.css rel=stylesheet>
 <link href=genfolder/bootstrap.min.css rel=stylesheet>
 <script src=genfolder/bootstrap.min.js></script>
-<div class="p-3 container">
-    <h1 class="fw-bold text-center">JuanFi Voucher Script Generator</h1>
+<script src=genfolder/generate.js></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="px-5 container">
+    <!--Title-->
+    <h1 class="fw-bold text-center pt-5">JuanFi Voucher Script Generator</h1>
     <h6 class="text-center mt-3">Simple Voucher generator fo Juanfi System</h6>
     <form id=rst>
         <div class="mb-3 rst"><label class=form-label for=Vendo>Vendo Name</label> <input class="form-control reset" id=Vendo placeholder=github@Kintoyyy value=JuanFi maxlength=14></div>
@@ -41,8 +44,9 @@
                 </div>
     </form>
     <div class="gap-2 d-grid">
-        <div class="d-flex gap-2"><button class="col btn btn-secondary" data-bs-target=#infoModal data-bs-toggle=modal>Infos</button> <button class="col btn btn-secondary" data-bs-target=#customize data-bs-toggle=modal>Customize</button></div><button class="btn btn-success" onclick=Generate()>Generate</button>        <button class="btn btn-primary" onclick='copyCode("OutputCode")'>Copy</button>
-        <div class="d-flex gap-2"><button class="col btn btn-danger" onclick=rst() value="Reset form">Clear All</button> <button class="col btn btn-warning" data-bs-target=#PrintCode data-bs-toggle=modal>Print</button></div>
+        <div class="d-flex gap-2"><button class="col btn btn-secondary" data-bs-target=#infoModal data-bs-toggle=modal>Infos</button> <button class="col btn btn-secondary" data-bs-target=#customize data-bs-toggle=modal>Customize</button></div><button class="btn btn-success" onclick=Generate()
+            id="genTxt">Generate</button> <button class="btn btn-primary" onclick='copyCode("OutputCode")'>Copy</button>
+        <div class="d-flex gap-2"><button class="col btn btn-danger" onclick=rst() value="Reset form">Clear All</button> <a class="col btn btn-primary" download="Voucher.rsc" id="downloadFile" style="display: none">Download rsc file</a><button class="col btn btn-warning" onclick='printvoucher()'>Print</button></div>
     </div>
     <div class="row m-2">
         <div class="col fw-bold h my-2">Script Output</div>
@@ -53,73 +57,66 @@
         <div class="text-center align-self-center" id=crdts>Made by <a href=https://kintoyyy.github.io/Me/ id=kintoyyy>kintoyyy ❤</a></div>
     </div>
     </div>
-    <div class="modal fade" id=infoModal tabindex=-1 aria-hidden=true>
-        <div class=modal-dialog>
-            <div class=modal-content>
-                <div class=modal-header>
-                    <h5 class=modal-title>Info version 1.3.3</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div>
-                <div class=modal-body id=modalprint>
-                    <li>Added Username + Password and Username only options
-                        <li>Added Currency Editor
-                            <li>Added Qr Code Vouchers
-                                <li>Added Voucher Validity
-                                    <li class=text-danger>User + password QR is still not working</li><br>
-                                    <p>Github: <a href=https://github.com/Kintoyyy/JuanfiGenerator>Kintoyyy/JuanfiGenerator</a>
-                                        <p>Gcash: <span class="fw-bold text-primary">09760009422 Kent R.</span></div>
-            </div>
+    </div>
+</div>
+<!--info Modal-->
+<div class="modal fade" id=infoModal tabindex=-1 aria-hidden=true>
+    <div class=modal-dialog>
+        <div class=modal-content>
+            <div class=modal-header>
+                <h5 class=modal-title>Info version 1.3.6</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div>
+            <div class=modal-body id=modalprint>
+                <li>Added Download rsc file
+                    <li>Printing voucher will open in newtab
+                        <li>Added Currency in total amount
+                            <li>AutoCopy script on print
+                                <li class=text-danger>User + password QR is still not working</li><br>
+                                <p>Github: <a href=https://github.com/Kintoyyy/JuanfiGenerator>Kintoyyy/JuanfiGenerator</a>
+                                    <p>Gcash: <span class="fw-bold text-primary">09760009422 Kent R.</span></div>
         </div>
     </div>
-    <print>
-        <div class="modal fade" id=PrintCode tabindex=-1 aria-hidden=true>
-            <div class="modal-dialog modal-fullscreen">
-                <div class=modal-content>
-                    <div class=modal-body id=Print>
-                        <link href=css/voucher.css rel=stylesheet>
-                        <div id=PrintBody>
-                            <div class="fw-bold text-center alert alert-warning" role=alert>Generate Voucher First!</div>
-                        </div>
-                    </div>
-                    <div class=modal-footer>
-                        <div class="fw-bold text-center alert alert-danger" role=alert>Paste the script in your Mikrotik Terminal first before Printing the vouchers!</div>
-                        <div class="fw-bold text-center alert alert-info" role=alert>Refresh the browser if cannot exit the print page</div><button class="btn btn-warning" onclick='printDiv("Print")'>Print</button> <button class="btn btn-secondary" type=button data-bs-dismiss=modal>Exit</button></div>
-                </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="customize" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="customizeLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customizeLabel">Voucher Customization</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-    </print>
-    <div class=modal id=customize tabindex=-1>
-        <div class=modal-dialog>
-            <div class=modal-content>
-                <div class=modal-header>
-                    <h5 class=modal-title>Voucher Customization</h5><button class=btn-close type=button data-bs-dismiss=modal aria-label=Close></button></div>
-                <div class=modal-body>
-                    <div class="row px-4">
-                        <div class=col>
-                            <table class=voucher style=width:150px>
-                                <tr>
-                                    <td style="font-weight:700;border-right:1px solid #000;background-color:#ffea8f" class=rotate id=voucher1 rowspan=4><span>PHP 200</span>
-                                        <td style=font-weight:700 colspan=2>JuanFi Hotspot
-                                            <d>
-                                                <tr>
-                                                    <td style=width:100%;font-weight:700;font-size:18px;text-align:center>ABC1234
-                                                        <tr>
-                                                            <td style=font-size:11px>Duration: 1D 2H 3M
-                                                                <tr>
-                                                                    <td style=font-size:12px colspan=3>Login: http: //<span style=font-weight:700>10.0.0.1</span></table>
-                        </div>
-                        <div class=col>
-                            <table class=voucher style=width:200px>
-                                <tr>
-                                    <td style="font-weight:700;border-right:1px solid #000;background-color:#ffea8f" class=rotate id=voucher2 rowspan=4><span>PHP 100</span>
-                                        <td style=font-weight:700 colspan=2>JuanFi
-                                            <td rowspan=3>
-                                                <div class=qr-wrapper><img class="p-1 qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=http://10.0.0.1/login?username=ABC1234"></div>
-                                                <tr>
-                                                    <td style=width:100%;font-weight:700;font-size:18px;text-align:center>ABC1234
-                                                        <tr>
-                                                            <td style=font-size:11px>Duration: 1D 2H 3M
-                                                                <tr>
-                                                                    <td style=font-size:12px colspan=3>Login: http: //<span style=font-weight:700>10.0.0.1</span></table>
-                        </div>
+            <div class="modal-body">
+                <div class="row px-4">
+                    <!--Voucher Example-->
+                    <div class=col>
+                        <table class=voucher style=width:150px>
+                            <tr>
+                                <td style="font-weight:700;border-right:1px solid #000;background-color:#ffea8f" class=rotate id=voucher1 rowspan=4><span>PHP 200</span>
+                                    <td style=font-weight:700 colspan=2>JuanFi Hotspot
+                                        <d>
+                                            <tr>
+                                                <td style=width:100%;font-weight:700;font-size:18px;text-align:center>ABC1234
+                                                    <tr>
+                                                        <td style=font-size:11px>Duration: 1D 2H 3M
+                                                            <tr>
+                                                                <td style=font-size:12px colspan=3>Login: http: //<span style=font-weight:700>10.0.0.1</span></table>
+                    </div>
+                    <!--Voucher Example QRR-->
+                    <div class=col>
+                        <table class=voucher style=width:200px>
+                            <tr>
+                                <td style="font-weight:700;border-right:1px solid #000;background-color:#ffea8f" class=rotate id=voucher2 rowspan=4><span>PHP 100</span>
+                                    <td style=font-weight:700 colspan=2>JuanFi
+                                        <td rowspan=3>
+                                            <div class=qr-wrapper><img class="p-1 qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=http://10.0.0.1/login?username=ABC1234"></div>
+                                            <tr>
+                                                <td style=width:100%;font-weight:700;font-size:18px;text-align:center>ABC1234
+                                                    <tr>
+                                                        <td style=font-size:11px>Duration: 1D 2H 3M
+                                                            <tr>
+                                                                <td style=font-size:12px colspan=3>Login: http: //<span style=font-weight:700>10.0.0.1</span></table>
                     </div>
                 </div>
                 <div class=p-3>
@@ -132,5 +129,36 @@
                             </div><button class="form-control btn btn-secondary" onclick=color() type=button>Apply</button></div>
                     </div>
                 </div>
-                <script src=genfolder/generate.js></script>
-                <script src=genfolder/genconfig.js></script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Print Location-->
+<div hidden>
+    <div id=PrintBody>
+    </div>
+</div>
+<script>
+    var _0xd6d7 = ["\x74\x65\x78\x74\x2F\x70\x6C\x61\x69\x6E", "\x72\x65\x76\x6F\x6B\x65\x4F\x62\x6A\x65\x63\x74\x55\x52\x4C", "\x55\x52\x4C", "\x63\x72\x65\x61\x74\x65\x4F\x62\x6A\x65\x63\x74\x55\x52\x4C", "\x67\x65\x6E\x54\x78\x74", "\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64", "\x4F\x75\x74\x70\x75\x74\x43\x6F\x64\x65", "\x63\x6C\x69\x63\x6B", "\x64\x6F\x77\x6E\x6C\x6F\x61\x64\x46\x69\x6C\x65", "\x68\x72\x65\x66", "\x69\x6E\x6E\x65\x72\x54\x65\x78\x74", "\x64\x69\x73\x70\x6C\x61\x79", "\x73\x74\x79\x6C\x65", "\x69\x6E\x6C\x69\x6E\x65\x2D\x62\x6C\x6F\x63\x6B", "\x61\x64\x64\x45\x76\x65\x6E\x74\x4C\x69\x73\x74\x65\x6E\x65\x72"];
+
+    function generateTxtFile(_0xbf23x2) {
+        var _0xbf23x3 = null;
+        var _0xbf23x4 = new Blob([_0xbf23x2], {
+            type: _0xd6d7[0]
+        });
+        if (_0xbf23x3 !== null) {
+            window[_0xd6d7[2]][_0xd6d7[1]](_0xbf23x3)
+        };
+        _0xbf23x3 = window[_0xd6d7[2]][_0xd6d7[3]](_0xbf23x4);
+        return _0xbf23x3
+    }(function() {
+        var _0xbf23x5 = document[_0xd6d7[5]](_0xd6d7[4]),
+            _0xbf23x6 = document[_0xd6d7[5]](_0xd6d7[6]);
+        _0xbf23x5[_0xd6d7[14]](_0xd6d7[7], function() {
+            var _0xbf23x7 = document[_0xd6d7[5]](_0xd6d7[8]);
+            _0xbf23x7[_0xd6d7[9]] = generateTxtFile(_0xbf23x6[_0xd6d7[10]]);
+            _0xbf23x7[_0xd6d7[12]][_0xd6d7[11]] = _0xd6d7[13]
+        }, false)
+    })()
+</script>
